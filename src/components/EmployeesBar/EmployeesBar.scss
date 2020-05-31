@@ -41,6 +41,9 @@
             padding: 0 20px;
             text-align: left;
 
+            .ant-select{
+                width: 100% !important;
+            }
             &>div{
                 h4{
                     margin-bottom: 5px !important; 
