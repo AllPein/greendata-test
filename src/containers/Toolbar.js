@@ -12,7 +12,7 @@ const Toolbar = ({ employees, selectedKeys, setSelectedKeys, setModal }) => {
   }
 
   const reloadData = () => {
-    let serverData = JSON.parse(localStorage.getItem("employees"));
+    let serverData = JSON.parse(localStorage.getItem("employees")) || [];
 
     if (compare(serverData, employees)) {
       store.dispatch(employeeActions.getEmployees());
@@ -26,7 +26,6 @@ const Toolbar = ({ employees, selectedKeys, setSelectedKeys, setModal }) => {
     }
   }
 
-
   const saveChanges = () => {
       localStorage.setItem("employees", JSON.stringify(employees));
       showNotification({
@@ -35,12 +34,12 @@ const Toolbar = ({ employees, selectedKeys, setSelectedKeys, setModal }) => {
       });
   }
   const addEmployee = () => {
-    store.dispatch(employeeActions.addEmployee({ name: "Новый сотрудник", birthDate: new Date(), position: "", gender: "Male", isFired: false }))
+    store.dispatch(employeeActions.addEmployee({ name: "Новый сотрудник", birthDate: new Date(), position: "", gender: "Male", isFired: false, colleagues: [] }))
     setTimeout(() => { setSelectedKeys([employees.length.toString()]) }, 0);
 
   }
   const removeEmployee = () => {
-     setSelectedKeys([]);
+    setSelectedKeys([]);
     store.dispatch(employeeActions.removeEmployees(selectedKeys));
   }
   return (

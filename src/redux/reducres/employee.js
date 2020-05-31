@@ -12,7 +12,7 @@ export default (state = initialState, { type, payload }) => {
         case 'EMPLOYEES:SET_EMPLOYEES':
             return {
                 ...state,
-                employees: payload
+                employees: payload || []
             }
         case 'EMPLOYEES:ADD_EMPLOYEE':
             return {
