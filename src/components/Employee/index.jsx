@@ -14,6 +14,11 @@ const Employee = ({ name, birthDate, position, gender, isFired, changeData, inde
   const [date, setDate] = useState(null);
   const [_colleagues, setColleagues] = useState([]);
 
+  const options = [ { name: 'Frontend разработчик', value: 'frontend' }, { name: 'Backend разработчик', value: 'backend' }, { name: 'Тестировщик', value: 'tester' },
+                    { name: 'Дизайнер ', value: 'design' }, { name: 'Product manager', value: 'product-manager' }, { name: 'Program manager', value: 'program-manager' } ];
+  
+  const radioOptions = [ { name: 'M', value: 'Male' }, { name: 'Ж', value: 'Female' } ];
+
   const changeInput = e => {
     changeData({ index, employee: { name: e.target.value, birthDate, position, gender, isFired, colleagues } });
   }
@@ -72,12 +77,9 @@ const Employee = ({ name, birthDate, position, gender, isFired, changeData, inde
           value={pos} 
           onChange={changeSelect}
           >
-            <Option value='frontend'>Frontend разработчик</Option>
-            <Option value='backend'>Backend разработчик</Option>
-            <Option value='design'>Дизайнер</Option>
-            <Option value='tester'>Тестировщик</Option>
-            <Option value='product-manager'>Product manager</Option>
-            <Option value='program-manager'>Program manager</Option>
+            { options.map((option, i) => (
+              <Option key={i} value={option.value}>{ option.name }</Option>
+            )) }
           </Select>
         </div>
         
@@ -92,7 +94,7 @@ const Employee = ({ name, birthDate, position, gender, isFired, changeData, inde
             optionLabelProp="label"
           >
             { employees && employees.map((employee, i) => (
-                <Option key={i} value={employee.name}>{employee.name}</Option>
+                <Option key={i} value={employee}>{employee.name}</Option>
               ))
             }
           </Select>
@@ -104,8 +106,9 @@ const Employee = ({ name, birthDate, position, gender, isFired, changeData, inde
           value={gend} 
           onChange={changeRadio}
           >
-            <Radio value={"Male"}>М</Radio>
-            <Radio value={"Female"}>Ж</Radio>
+            {radioOptions.map((option) => (
+              <Radio value={option.value}>{ option.name }</Radio>
+            ))}
           </Radio.Group>
         </div>
         
